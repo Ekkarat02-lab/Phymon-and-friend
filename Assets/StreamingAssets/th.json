@@ -1,0 +1,20 @@
+{
+  "items": [
+    { "key": "StartGame", "value": "เริ่มเกม" },
+    { "key": "Settings", "value": "ตั้งค่า" },
+    { "key": "Credit", "value": "เครดิต" },
+    { "key": "Exit", "value": "ออกจากเกม" },
+    { "key": "Feedback", "value": "ข้อเสนอแนะ" },
+    { "key": "Learning", "value": "เรียนรู้" },
+    { "key": "Back", "value": "กลับ" },
+    { "key": "BackMenu", "value": "เมนูหลัก" },
+    { "key": "Reset", "value": "ล้างข้อมูล" },
+    { "key": "Submit", "value": "ส่งข้อมูล" },
+    { "key": "Replay", "value": "เริ่มใหม่" },
+    { "key": "Resume", "value": "เล่นต่อ" },
+    { "key": "Next", "value": "ด่านต่อไป" },
+    { "key": "Skip", "value": "ข้าม" },
+    { "key": "Quest", "value": "ภารกิจ" },
+    { "key": "congra", "value": "ขอแสดงความยินดี! น้อง ๆเล่นครบทุกด่านแล้ว" }
+  ]
+}

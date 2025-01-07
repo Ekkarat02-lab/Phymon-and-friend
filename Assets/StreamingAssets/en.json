@@ -1,0 +1,20 @@
+{
+  "items": [
+    { "key": "StartGame", "value": "StartGame" },
+    { "key": "Settings", "value": "Settings" },
+    { "key": "Credit", "value": "Credit" },
+    { "key": "Exit", "value": "Exit" },
+    { "key": "Feedback", "value": "Feedback" },
+    { "key": "Learning", "value": "Learning" },
+    { "key": "Back", "value": "Back" },
+    { "key": "BackMenu", "value": "Back Menu" },
+    { "key": "Reset", "value": "Reset" },
+    { "key": "Submit", "value": "Submit" },
+    { "key": "Replay", "value": "Replay" },
+    { "key": "Resume", "value": "Resume" },
+    { "key": "Next", "value": "NextLevel" },
+    { "key": "Skip", "value": "skip" },
+    { "key": "Quest", "value": "Quest" },
+    { "key": "congra", "value": "congratulations!" }
+  ]
+}

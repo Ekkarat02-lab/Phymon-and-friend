@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6635836111091214878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3228438778406482712}
+  - component: {fileID: 2539761263272446154}
+  - component: {fileID: 4362613119682529678}
+  - component: {fileID: 7392001070959254902}
+  - component: {fileID: 7379849368194193785}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3228438778406482712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635836111091214878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2539761263272446154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635836111091214878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066a72b179b2ce44783ea53153a16d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mascotPrefabs:
+  - {fileID: 2671335674873310181, guid: bd2937e2c194fd24bb24b3935a97e0a0, type: 3}
+  - {fileID: 4001111050991611581, guid: 5849237e3c33e28408c70a88777fe30e, type: 3}
+  - {fileID: 4437380349619482384, guid: 736a3e33c7a0d4a4dbcff2e316d18fa2, type: 3}
+  - {fileID: 4861017327718421698, guid: 135812e791f284d48a4144e1954eff02, type: 3}
+  - {fileID: 3918430720689249296, guid: a3c20a8760ee362428ae44590b77e42d, type: 3}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  indicatorArrowPrefab: {fileID: 916265242935322159, guid: 0a10ce97170f02e4aa713f5ce742b9b9, type: 3}
+  questionManager: {fileID: 4362613119682529678}
+  rewardAmount: 10
+--- !u!114 &4362613119682529678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635836111091214878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caf7c7776be5b042b3ab408bdc2fe10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionPanel: {fileID: 0}
+  questionText: {fileID: 0}
+  answerButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  levelManager: {fileID: 2539761263272446154}
+  questions: []
+--- !u!114 &7392001070959254902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635836111091214878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f79162d079cc54586a36d6c31ab80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 2539761263272446154}
+--- !u!114 &7379849368194193785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6635836111091214878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed25e5b25c5905a45b5b96dc777155aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

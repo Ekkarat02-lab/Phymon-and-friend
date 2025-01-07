@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "255244516102",
+    "firebase_url": "https://phymon-and-friend-60ca0-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "phymon-and-friend-60ca0",
+    "storage_bucket": "phymon-and-friend-60ca0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255244516102:android:2e543bdafbdf0b3a487c87",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Phymon_And_Friend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRsKM6RO-pHBu8i52DU3PjHzV7r2qQiAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
