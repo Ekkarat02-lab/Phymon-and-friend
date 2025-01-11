@@ -311,7 +311,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueAudioClips:
-  - {fileID: 8300000, guid: c7b886757a7ec5d47bbcf3adea5f40fa, type: 3}
   - {fileID: 8300000, guid: da3fc42bec559fd42890ff22cc96658d, type: 3}
   - {fileID: 8300000, guid: a1951e0a3cb7c13459d2d5493e5b6480, type: 3}
   dialogueImages:
@@ -321,7 +320,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1af4d023241a7864a83952f93f8adcd7, type: 3}
   - {fileID: 21300000, guid: 7a67e88e68caabe44a2fd4b23a712544, type: 3}
   characterSprites:
-  - {fileID: 21300000, guid: 84dc55cc2ea04e8428340b04d943b86f, type: 3}
   - {fileID: 21300000, guid: 40bb6e77e74fc6f43bc4508738b96132, type: 3}
   - {fileID: 21300000, guid: 84dc55cc2ea04e8428340b04d943b86f, type: 3}
   audioSource: {fileID: 592717342}
