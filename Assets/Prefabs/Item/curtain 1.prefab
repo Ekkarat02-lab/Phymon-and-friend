@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8
 --- !u!60 &6777250809582579137
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -1090,17 +1090,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6952528390559317529, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
   m_PrefabInstance: {fileID: 1134157401883202427}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &680370500 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3162225730714651490, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
-  m_PrefabInstance: {fileID: 1134157401883202427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &850003645 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4831848713505439737, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
@@ -1342,7 +1331,8 @@ PrefabInstance:
       propertyPath: questItems.Array.data[0]
       value: 
       objectReference: {fileID: 637552345}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7379849368194193785, guid: 13732cca2ada2bb489354b1268c6961e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2819,7 +2809,7 @@ PrefabInstance:
     - target: {fileID: 2603310037998749298, guid: cee6e5a05a4b53e409d8677dbea1369a, type: 3}
       propertyPath: itemsCollectedText
       value: 
-      objectReference: {fileID: 680370500}
+      objectReference: {fileID: 0}
     - target: {fileID: 2603310037998749298, guid: cee6e5a05a4b53e409d8677dbea1369a, type: 3}
       propertyPath: heartImages.Array.data[0]
       value: 
@@ -2896,7 +2886,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3564022795580802924, guid: cee6e5a05a4b53e409d8677dbea1369a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

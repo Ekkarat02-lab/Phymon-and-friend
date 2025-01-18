@@ -8,7 +8,7 @@ public class FeedbackManager : MonoBehaviour
 {
     public TMP_InputField inputField;
     public Button submitButton;
-    public TMP_Text feedbackStatusText;  // เพิ่ม TMP_Text เพื่อแสดงข้อความสถานะ
+    public TMP_Text feedbackStatusText;
 
     private int submitButtonClickCount = 0;
     private bool isFirebaseReady = false;
@@ -44,7 +44,6 @@ public class FeedbackManager : MonoBehaviour
         {
             Debug.Log("Feedback is empty!");
 
-            // แสดงข้อความเมื่อไม่มีฟีดแบ็ก
             feedbackStatusText.text = "Please enter some feedback.";
             feedbackStatusText.color = Color.red;
         }
@@ -59,17 +58,15 @@ public class FeedbackManager : MonoBehaviour
             File.AppendAllText(filePath, logEntry);
             Debug.Log($"Feedback saved to file: {filePath}");
 
-            // แสดงข้อความใน UI ว่าฟีดแบ็กถูกบันทึกแล้วที่ไหน
             feedbackStatusText.text = $"Feedback saved at: {filePath}";
-            feedbackStatusText.color = Color.blue; // ตั้งสีข้อความให้เป็นสีฟ้า
+            feedbackStatusText.color = Color.blue;
         }
         catch (Exception ex)
         {
             Debug.LogError($"Error saving feedback to file: {ex.Message}");
 
-            // แสดงข้อความใน UI หากเกิดข้อผิดพลาด
             feedbackStatusText.text = "Error saving feedback. Please try again.";
-            feedbackStatusText.color = Color.red; // ตั้งสีข้อความให้เป็นสีแดง
+            feedbackStatusText.color = Color.red;
         }
     }
 

@@ -85,7 +85,7 @@ public class QuestionManager : MonoBehaviour
 
         if (levelManager != null)
         {
-            levelManager.ShowIndicatorArrows(); // เรียกแสดงลูกศร
+            levelManager.ShowIndicatorArrows();
         }
     }
 
