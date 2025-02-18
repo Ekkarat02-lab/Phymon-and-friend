@@ -19,8 +19,8 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private Animator transitionAnim;
     [SerializeField] private GameObject dialogueImageDisplay;
 
-    public Button skipButton; // ปุ่ม Skip
-    public Button returnToMenuButton; // ปุ่มกลับเมนูหลัก
+    public Button skipButton;
+    public Button returnToMenuButton;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class CutsceneManager : MonoBehaviour
 
         // ผูกปุ่ม Skip เข้ากับฟังก์ชัน
         skipButton.onClick.AddListener(SkipCutscene);
-        returnToMenuButton.onClick.AddListener(ReturnToMainMenu); // ผูกปุ่มกลับเมนูหลัก
+        returnToMenuButton.onClick.AddListener(ReturnToMainMenu);
 
         UpdateDialogue();
     }
@@ -101,10 +101,8 @@ public class CutsceneManager : MonoBehaviour
 
     public void SkipCutscene()
     {
-        // หยุดการทำงานทั้งหมดของ cutscene
         StopAllCoroutines();
-
-        // ไปยังฉากถัดไปทันที
+        
         LoadNextScene(sceneName);
     }
 

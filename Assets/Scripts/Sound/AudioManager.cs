@@ -4,10 +4,10 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    public AudioSource audioSource; // ใช้สำหรับเล่นเสียง
-    public AudioClip clickButton; // คลิปเสียงเมื่อกดปุ่ม
-    public AudioClip clickMascot; // คลิปเสียงเมื่อคลิกโดน Mascot
-    public AudioClip winnerSound; // คลิปเสียงเมื่อเก็บ Mascot ครบแล้ว
+    public AudioSource audioSource;
+    public AudioClip clickButton;
+    public AudioClip clickMascot;
+    public AudioClip winnerSound;
 
     private void Awake()
     {
@@ -20,9 +20,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        // ปิดเสียงตั้งแต่เริ่มเกม (ถ้ามีการเล่นเสียงใน AudioSource)
-        //audioSource.Stop();
     }
 
     public void PlayClickButtonSound()
@@ -41,7 +38,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // ฟังก์ชันสำหรับเล่นเสียงเมื่อเก็บ Mascot ครบแล้ว
     public void PlayWinnerSound()
     {
         if (winnerSound != null)

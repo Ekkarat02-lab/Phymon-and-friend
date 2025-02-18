@@ -35,7 +35,6 @@ public class FeedbackManager : MonoBehaviour
 
             submitButtonClickCount++;
 
-            // Save feedback to local file
             SaveFeedbackToFile(feedback);
 
             inputField.text = "";

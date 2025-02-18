@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     public Sprite[] dialogueImages;
     private int currentLine = 0;
     public int currentStory;
-    public string sceneName;  // ประกาศตัวแปรสำหรับเก็บชื่อ Scene
+    public string sceneName;
 
     private TextMeshProUGUI dialogueText;
     private Button nextButton;
@@ -32,7 +32,6 @@ public class DialogueManager : MonoBehaviour
         dialogueInstance.SetActive(true);
 
         dialogueText = dialogueInstance.GetComponentInChildren<TextMeshProUGUI>();
-        //audioSource = dialogueInstance.GetComponent<AudioSource>();
 
         if (dialogueText == null)
         {

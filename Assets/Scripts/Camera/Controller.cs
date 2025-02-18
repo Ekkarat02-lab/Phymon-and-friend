@@ -5,8 +5,8 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     public float dragSpeed = 2f;
-    public float zoomSpeed = 0.1f; // ลดความเร็วของการซูมสำหรับการสัมผัส
-    public float smoothTime = 0.2f; // ความสมูทของการเคลื่อนไหว
+    public float zoomSpeed = 0.1f;
+    public float smoothTime = 0.2f;
     public float minZoom = 5f;
     public float maxZoom = 15f;
     public Vector2 dragLimitMin;
@@ -17,7 +17,9 @@ public class Controller : MonoBehaviour
     private Vector3 targetPosition;
     private float targetZoom;
     private Vector3 velocity = Vector3.zero;
-
+    private Vector3 originalPosition; // เก็บตำแหน่งก่อนซูมเข้า
+    private bool isZoomedIn = false; // เช็คว่ามีการซูมเข้าหรือไม่
+    
     private void Start()
     {
         cam = Camera.main;
@@ -27,14 +29,17 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount == 1) // ลากด้วยนิ้วเดียว
+        if (Input.touchCount == 1)
         {
-            DragCamera();
+            DragCameraTouch();
         }
-        else if (Input.touchCount == 2) // ซูมด้วยสองนิ้ว
+        else if (Input.touchCount == 2)
         {
-            ZoomCamera();
+            ZoomCameraTouch();
         }
+
+        DragCameraMouse();
+        ZoomCameraMouse();
 
         // Smooth Movement
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
@@ -43,7 +48,7 @@ public class Controller : MonoBehaviour
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime / smoothTime);
     }
 
-    void DragCamera()
+    void DragCameraTouch()
     {
         Touch touch = Input.GetTouch(0);
 
@@ -60,18 +65,36 @@ public class Controller : MonoBehaviour
             Vector3 move = new Vector3(difference.x * dragSpeed * Time.deltaTime, difference.y * dragSpeed * Time.deltaTime, 0);
             targetPosition += move;
 
-            // Clamp the target position
-            targetPosition.x = Mathf.Clamp(targetPosition.x, dragLimitMin.x, dragLimitMax.x);
-            targetPosition.y = Mathf.Clamp(targetPosition.y, dragLimitMin.y, dragLimitMax.y);
+            ClampCameraPosition();
         }
     }
 
-    void ZoomCamera()
+    void DragCameraMouse()
     {
+        if (Input.GetMouseButtonDown(2))
+        {
+            dragOrigin = Input.mousePosition;
+        }
+
+        if (Input.GetMouseButton(2))
+        {
+            Vector3 difference = dragOrigin - Input.mousePosition;
+            dragOrigin = Input.mousePosition;
+
+            Vector3 move = new Vector3(difference.x * dragSpeed * Time.deltaTime, difference.y * dragSpeed * Time.deltaTime, 0);
+            targetPosition += move;
+
+            ClampCameraPosition();
+        }
+    }
+
+    void ZoomCameraTouch()
+    {
+        if (Input.touchCount < 2) return;
+
         Touch touchZero = Input.GetTouch(0);
         Touch touchOne = Input.GetTouch(1);
 
-        // ตรวจสอบการสัมผัสทั้งสองนิ้ว
         if (touchZero.phase == TouchPhase.Moved && touchOne.phase == TouchPhase.Moved)
         {
             Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
@@ -85,5 +108,32 @@ public class Controller : MonoBehaviour
             targetZoom -= difference * zoomSpeed;
             targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
         }
+    }
+
+    void ZoomCameraMouse()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll != 0)
+        {
+            if (scroll < 0 && isZoomedIn)
+            {
+                targetPosition = originalPosition;
+            }
+            else if (scroll > 0 && !isZoomedIn)
+            {
+                originalPosition = targetPosition; 
+                isZoomedIn = true;
+            }
+
+            targetZoom -= scroll * (zoomSpeed * 100);
+            targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+        }
+    }
+
+    void ClampCameraPosition()
+    {
+        targetPosition.x = Mathf.Clamp(targetPosition.x, dragLimitMin.x, dragLimitMax.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, dragLimitMin.y, dragLimitMax.y);
     }
 }

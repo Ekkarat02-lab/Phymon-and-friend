@@ -9,9 +9,9 @@ public class Mascot : MonoBehaviour
     {
         if (gameObject.CompareTag("Mascot")) 
         {
-            levelManager.FoundMascot(mascotIndex); // แจ้งว่า Mascot ถูกพบ
-            GameManager.Instance.HideMascotOnUI(mascotIndex); // ซ่อน UI ของ Mascot ที่ถูกพบ
-            Destroy(gameObject); // ทำลาย Mascot
+            levelManager.FoundMascot(mascotIndex);
+            GameManager.Instance.HideMascotOnUI(mascotIndex);
+            Destroy(gameObject);
         }
     }
 }

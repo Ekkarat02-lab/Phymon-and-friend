@@ -23,9 +23,7 @@ public class RewardManager : MonoBehaviour
     public GameObject goToMenuPanel;
     public string nextSceneName;
     
-    // เพิ่มตัวแปรสำหรับปุ่ม Skip
     [SerializeField] private Button skipButton;
-
     [SerializeField] private AudioSource audioSource;
     [SerializeField] Canvas EndCanvas;
     [SerializeField] private Image dialogueImage;
@@ -45,7 +43,7 @@ public class RewardManager : MonoBehaviour
     {
         dialogueInstance = Instantiate(dialoguePrefab);
         dialogueText = dialogueInstance.GetComponentInChildren<TextMeshProUGUI>();
-        //nextButton.onClick.AddListener(DisplayNextLine);
+ 
         dialogueInstance.SetActive(false);
         EndCanvas.enabled = false;
         
@@ -54,7 +52,6 @@ public class RewardManager : MonoBehaviour
         dialogueInstance.SetActive(false);
         EndCanvas.enabled = false;
 
-        // ผูกฟังก์ชัน GoToSkipDialogue กับปุ่ม Skip
         if (skipButton != null)
         {
             skipButton.onClick.AddListener(SkipDialogue);
@@ -76,7 +73,6 @@ public class RewardManager : MonoBehaviour
 
     public void ShowDialogue()
     {
-        //dialogueInstance.SetActive(true);
         EndCanvas.enabled = true;
         currentLine = 0;
         characterImage.gameObject.SetActive(true);
@@ -189,15 +185,12 @@ public class RewardManager : MonoBehaviour
         }
     }
 
-    // ฟังก์ชันสำหรับข้ามบทสนทนา
     public void SkipDialogue()
     {
         if (isTyping)
         {
-            // ถ้ากำลังพิมพ์ ข้ามไปที่ข้อความเต็มทันที
             skipTyping = true;
 
-            // หยุดเสียงที่กำลังเล่นอยู่
             if (audioSource.isPlaying)
             {
                 audioSource.Stop();
@@ -206,13 +199,11 @@ public class RewardManager : MonoBehaviour
             return;
         }
 
-        // หยุดเสียงที่กำลังเล่นอยู่
         if (audioSource.isPlaying)
         {
             audioSource.Stop();
         }
 
-        // ข้ามไปบรรทัดสุดท้ายหรือจบบทสนทนา
         currentLine = dialogueLines.Length; 
         dialogueInstance.SetActive(false);
         ShowGoToMenuPanel();

@@ -49,21 +49,9 @@ public class MouseClickHandler : MonoBehaviour
                         GameManager.Instance.LoseHeart();
                         GameManager.Instance.ShowPhymonSForDuration();
                     }
-                        AudioManager.Instance.PlayClickButtonSound();
+                    AudioManager.Instance.PlayClickButtonSound();
                 }
-                /*else if (hit.collider.CompareTag("Get Item"))
-                {
-                    // คลิก Item และทำลาย
-                    Debug.Log("Item clicked!");
-                    Destroy(hit.collider.gameObject);
 
-                    // เพิ่ม Logic ที่เกี่ยวข้องกับการเก็บไอเท็ม เช่น อัพเดตจำนวนที่เก็บได้
-                    GameManager.Instance.CollectItem(); // สมมติว่า GameManager มีฟังก์ชันนี้
-                }
-                else
-                {
-                    Debug.Log($"Clicked on non-handled object: {hit.collider.name}");
-                }*/
             }
             else
             {

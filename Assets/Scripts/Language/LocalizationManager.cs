@@ -31,7 +31,7 @@ public class LocalizationManager : MonoBehaviour
 
     private void Start()
     {
-        LoadSavedLanguage(); // โหลดค่าภาษาที่บันทึกไว้
+        LoadSavedLanguage(); 
     }
 
     public void LoadLanguage(string languageCode)

@@ -6,65 +6,49 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton instance เพื่อเข้าถึง GameManager จากสคริปต์อื่นๆ
     public static GameManager Instance;
 
-    // อ้างอิงถึง RewardManager สำหรับการจัดการรางวัล
     public RewardManager rewardManager;
 
-    // ตัวแปรสำหรับการจัดการจำนวนหัวใจ
     public int totalHearts = 3;
     private int currentHearts;
-    public Image[] heartImages;  // UI รูปภาพหัวใจ
-    public GameObject[] mascotUIImages;  // UI รูปภาพมาสคอต
+    public Image[] heartImages;
+    public GameObject[] mascotUIImages;
 
-    // GameObjects ที่แสดงสถานะต่างๆ ของมาสคอต Phymon
-    public GameObject phymonB; // Phymon เริ่มต้น
-    public GameObject phymonS; // เมื่อเสียหัวใจ
-    public GameObject phymonQ; // แสดงเมื่อคลิกผิด
-    public GameObject phymonW; // เมื่อหามาสคอตครบ
+    public GameObject phymonB;
+    public GameObject phymonS;
+    public GameObject phymonQ;
+    public GameObject phymonW;
 
-    public AudioSource audioSource;  // อ้างอิงถึง AudioSource
-    public AudioClip dialogueSound;  // อ้างอิงถึง AudioClip
-    
-    // การติดตามสถานะของมาสคอตและตัวจับเวลา
+    public AudioSource audioSource;
+    public AudioClip dialogueSound;
+
     private bool allMascotsFound = false;
     private float mascotMissTimer = 0f;
     private float mascotCheckTimer = 0f;
     private int previousMascotCount;
 
-    // สถานะการแสดง PhymonQ
     private bool isPhymonQActive = false;
     private Coroutine hidePhymonQCoroutine;
 
-    // ตัวแปรสำหรับคะแนน
     private int currentScore = 0;
-    
-    //ส่งข้อมูลเข้า firebase console
+
     private float startTime;
     
-    /*private int collectedItems = 0; // จำนวนไอเท็มที่เก็บได้
-    public int totalItems = 5; // จำนวนไอเท็มทั้งหมดในเควส
-    public TextMeshProUGUI itemsCollectedText;*/
-    
-    // ฟังก์ชันนี้จะทำงานเมื่อเริ่มต้นสคริปต์
     private void Awake()
     {
-        Instance = this;  // กำหนด instance ของ GameManager
-        currentHearts = totalHearts;  // กำหนดค่าเริ่มต้นของหัวใจ
-        UpdateHeartUI();  // อัปเดต UI หัวใจตอนเริ่มเกม
-        previousMascotCount = mascotUIImages.Length;  // บันทึกจำนวนมาสคอตเริ่มต้น
+        Instance = this;
+        currentHearts = totalHearts;
+        UpdateHeartUI(); 
+        previousMascotCount = mascotUIImages.Length; 
     }
     
     private void Start()
     {
-        // เริ่มต้นจับเวลาตั้งแต่เข้ามาใน Scene
         startTime = Time.time;
-        // Debug เพื่อดูว่าการจับเวลาเริ่มทำงาน
+
         Debug.Log($"[SceneAnalytics] Start Time: {startTime}");
-        //UpdateItemsCollectedText();
-        
-        // ตรวจสอบว่ามี Button คอมโพเนนต์หรือไม่
+
         Button phymonQButton = phymonQ.GetComponent<Button>();
         if (phymonQButton != null)
         {
@@ -78,26 +62,24 @@ public class GameManager : MonoBehaviour
     
     private void Update()
     {
-        // ตรวจสอบการทำงานต่างๆ ถ้ายังไม่หามาสคอตครบ
         if (!allMascotsFound)
         {
-            CheckMissedClick();  // ตรวจสอบว่าคลิกผิดหรือไม่
-            CheckMascotCount();  // ตรวจสอบจำนวนมาสคอต
-            CheckAllMascotsFound();  // ตรวจสอบว่าหามาสคอตครบหรือยัง
+            CheckMissedClick();
+            CheckMascotCount();
+            CheckAllMascotsFound();
         }
     }
 
-    // ฟังก์ชันตรวจสอบว่าไม่มีการคลิกมาสคอตภายในเวลา 5 วินาที
     private void CheckMissedClick()
     {
-        if (Input.GetMouseButtonDown(0))  // เมื่อคลิกเมาส์
+        if (Input.GetMouseButtonDown(0))
         {
-            mascotMissTimer = 0f;  // รีเซ็ตตัวจับเวลา
+            mascotMissTimer = 0f;
         }
         else
         {
-            mascotMissTimer += Time.deltaTime;  // เพิ่มค่าตัวจับเวลา
-            // ถ้า 5 วินาทีผ่านไปโดยยังไม่แสดง PhymonQ
+            mascotMissTimer += Time.deltaTime;
+
             if (mascotMissTimer >= 5f && !isPhymonQActive)
             {
                 ShowPhymonQ();
@@ -105,13 +87,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ฟังก์ชันตรวจสอบว่าไม่มีการเปลี่ยนแปลงในจำนวนมาสคอตภายในเวลา 5 นาที
     private void CheckMascotCount()
     {
-        if (mascotUIImages.Length == previousMascotCount)  // ถ้าจำนวนมาสคอตไม่เปลี่ยนแปลง
+        if (mascotUIImages.Length == previousMascotCount)
         {
-            mascotCheckTimer += Time.deltaTime;  // เพิ่มค่าตัวจับเวลา
-            // ถ้า 5 นาทีผ่านไปโดยไม่มีการเปลี่ยนแปลงในจำนวนมาสคอต
+            mascotCheckTimer += Time.deltaTime;
             if (mascotCheckTimer >= 300f && !isPhymonQActive)
             {
                 ShowPhymonQ();
@@ -119,48 +99,44 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            mascotCheckTimer = 0f;  // รีเซ็ตตัวจับเวลาเมื่อจำนวนมาสคอตเปลี่ยนแปลง
+            mascotCheckTimer = 0f;
             previousMascotCount = mascotUIImages.Length;
         }
     }
 
-    // ฟังก์ชันตรวจสอบว่าหามาสคอตครบแล้วหรือยัง
     private void CheckAllMascotsFound()
     {
         bool allFound = true;
 
-        foreach (var mascot in mascotUIImages)  // ตรวจสอบมาสคอตแต่ละตัวใน UI
+        foreach (var mascot in mascotUIImages)
         {
-            if (mascot.activeSelf)  // ถ้ามาสคอตตัวใดยังแสดงอยู่
+            if (mascot.activeSelf)
             {
-                allFound = false;  // ยังไม่ครบ
+                allFound = false;
                 break;
             }
         }
 
-        // ถ้าหามาสคอตครบแล้ว แสดง PhymonW
         if (allFound && !allMascotsFound)
         {
             allMascotsFound = true;
-            phymonB.SetActive(false);  // ซ่อน PhymonB
-            phymonW.SetActive(true);  // แสดง PhymonW
+            phymonB.SetActive(false);
+            phymonW.SetActive(true);
             Debug.Log("หามาสคอตครบแล้ว! แสดง PhymonW");
         }
     }
 
-    // แสดง PhymonQ เมื่อผู้เล่นคลิกผิด
     private void ShowPhymonQ()
     {
-        if (!allMascotsFound)  // ถ้ายังไม่หามาสคอตครบ
+        if (!allMascotsFound)
         {
-            phymonQ.SetActive(true);  // แสดง PhymonQ
-            phymonB.SetActive(false);  // ซ่อน PhymonB
-            isPhymonQActive = true;  // ตั้งค่าสถานะว่า PhymonQ แสดงอยู่
+            phymonQ.SetActive(true);
+            phymonB.SetActive(false);
+            isPhymonQActive = true;
             Debug.Log("แสดง PhymonQ!");
         }
     }
 
-    // ฟังก์ชันที่จะถูกเรียกเมื่อคลิกปุ่ม `phymonQ`
     public void OnPhymonQButtonClick()
     {
         if (isPhymonQActive)
@@ -171,8 +147,7 @@ public class GameManager : MonoBehaviour
         PlaySoundOnly();
         Debug.Log("คลิกที่ปุ่ม phymonQ");
     }
-    
-    // ฟังก์ชัน HidePhymonQAndShowB ที่อัปเดต
+
     public void HidePhymonQAndShowB()
     {
         if (isPhymonQActive && !allMascotsFound)
@@ -189,8 +164,7 @@ public class GameManager : MonoBehaviour
             hidePhymonQCoroutine = StartCoroutine(HidePhymonBAfterDelay(4f));
         }
     }
-    
-    // ฟังก์ชันเพื่อเปลี่ยนจาก phymonQ ไปยัง phymonB โดยไม่แสดง dialogue
+
     public void SwitchPhymonQToBWithoutDialogue()
     {
         if (isPhymonQActive)
@@ -202,93 +176,82 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Coroutine เพื่อซ่อน PhymonB หลังจากดีเลย์
     private IEnumerator HidePhymonBAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);  // รอจนกว่าดีเลย์จะหมด
-        phymonB.SetActive(false);  // ซ่อน PhymonB
+        yield return new WaitForSeconds(delay);
+        phymonB.SetActive(false);
     }
 
-    // ซ่อนมาสคอตใน UI ตามดัชนีที่ระบุ
     public void HideMascotOnUI(int mascotIndex)
     {
-        if (mascotIndex >= 0 && mascotIndex < mascotUIImages.Length)  // ตรวจสอบดัชนีว่าอยู่ในขอบเขต
+        if (mascotIndex >= 0 && mascotIndex < mascotUIImages.Length)
         {
-            mascotUIImages[mascotIndex].SetActive(false);  // ซ่อนมาสคอต
+            mascotUIImages[mascotIndex].SetActive(false); 
             Debug.Log("ซ่อน Mascot UI ที่ดัชนี: " + mascotIndex);
 
-            HidePhymonQAndShowB();  // รีเซ็ตการแสดง Phymon
+            HidePhymonQAndShowB();
         }
         else
         {
-            Debug.LogError("ดัชนีของมาสคอตไม่ถูกต้อง: " + mascotIndex);  // จัดการกรณีดัชนีไม่ถูกต้อง
+            Debug.LogError("ดัชนีของมาสคอตไม่ถูกต้อง: " + mascotIndex);
         }
     }
 
-    // แสดง PhymonS ชั่วคราวเมื่อเสียหัวใจ
     public void ShowPhymonSForDuration()
     {
-        if (!allMascotsFound)  // ถ้ายังไม่หามาสคอตครบ
+        if (!allMascotsFound)
         {
-            phymonB.SetActive(false);  // ซ่อน PhymonB
-            phymonS.SetActive(true);  // แสดง PhymonS
-            StartCoroutine(HidePhymonSAfterDelay(3f));  // ซ่อน PhymonS หลังจาก 3 วินาที
+            phymonB.SetActive(false);
+            phymonS.SetActive(true);
+            StartCoroutine(HidePhymonSAfterDelay(3f)); 
         }
     }
 
-    // Coroutine เพื่อซ่อน PhymonS หลังจากดีเลย์
     private IEnumerator HidePhymonSAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        phymonS.SetActive(false);  // ซ่อน PhymonS
-        phymonB.SetActive(true);  // แสดง PhymonB
+        phymonS.SetActive(false); 
+        phymonB.SetActive(true); 
     }
 
-    // เพิ่มคะแนนเมื่อผู้เล่นทำภารกิจสำเร็จ
     public void AddScore(int scoreAmount)
     {
-        currentScore += scoreAmount;  // เพิ่มคะแนน
+        currentScore += scoreAmount; 
         Debug.Log("เพิ่มคะแนน: " + scoreAmount + " | คะแนนรวม: " + currentScore);
     }
 
-    // ให้รางวัลและเพิ่มคะแนน
     public void GiveReward(int rewardAmount)
     {
-        AddScore(rewardAmount);  // เพิ่มคะแนน
-        rewardManager.GiveReward(rewardAmount);  // แจ้ง RewardManager ให้แจกของรางวัล
+        AddScore(rewardAmount);
+        rewardManager.GiveReward(rewardAmount);
     }
 
-    // เปิดระดับถัดไป
     public void UnlockNextLevel()
     {
         Debug.Log("ระดับถัดไปปลดล็อก!");
     }
 
-    // ฟังก์ชันจบเกม
     public void GameOver()
     {
         Debug.Log("เกมจบ!");
         ResetHearts();  // รีเซ็ตหัวใจ
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);  // โหลดซีนปัจจุบันใหม่
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // อัปเดต UI หัวใจ
     private void UpdateHeartUI()
     {
         for (int i = 0; i < heartImages.Length; i++)
         {
-            heartImages[i].enabled = i < currentHearts;  // แสดงหรือซ่อนหัวใจตามจำนวน
+            heartImages[i].enabled = i < currentHearts;
         }
     }
 
-    // รีเซ็ตหัวใจ
     public void ResetHearts()
     {
         currentHearts = totalHearts;
         UpdateHeartUI();
     }
 
-    // ฟังก์ชันเมื่อเสียหัวใจ
     public void LoseHeart()
     {
         if (currentHearts > 0)
@@ -299,22 +262,20 @@ public class GameManager : MonoBehaviour
 
             if (currentHearts <= 0)
             {
-                GameOver();  // ถ้าไม่มีหัวใจเหลือให้จบเกม
+                GameOver();
             }
             else
             {
-                ShowPhymonSForDuration();  // แสดง PhymonS เมื่อเสียหัวใจ
+                ShowPhymonSForDuration();
             }
         }
     }
-    
-    // ตรวจสอบว่า phymonQ กำลังแสดงอยู่หรือไม่
+
     public bool IsPhymonQActive()
     {
         return isPhymonQActive;
     }
 
-    // ซ่อน phymonQ แล้วแสดง phymonS เป็นเวลา 2 วินาที จากนั้นซ่อน phymonS และแสดง phymonB
     public void SwitchPhymonQToS()
     {
         if (isPhymonQActive)
@@ -324,53 +285,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Coroutine เพื่อจัดการแสดงผลตามที่กำหนด
     private IEnumerator ShowPhymonSAfterVirusClick()
     {
-        phymonQ.SetActive(false);   // ซ่อน phymonQ
-        phymonS.SetActive(true);    // แสดง phymonS
+        phymonQ.SetActive(false);
+        phymonS.SetActive(true);
         isPhymonQActive = false;
 
-        yield return new WaitForSeconds(2f); // รอ 2 วินาที
+        yield return new WaitForSeconds(2f);
 
-        phymonS.SetActive(false);   // ซ่อน phymonS
-        phymonB.SetActive(true);    // แสดง phymonB
+        phymonS.SetActive(false); 
+        phymonB.SetActive(true);
     }
     
     public void PlaySoundOnly()
     {
         if (audioSource != null && dialogueSound != null)
         {
-            audioSource.clip = dialogueSound;  // กำหนดคลิปเสียง
-            audioSource.Play();  // เล่นเสียง
+            audioSource.clip = dialogueSound;
+            audioSource.Play();
         }
         else
         {
-            Debug.LogError("AudioSource or AudioClip is null!");  // ตรวจสอบว่า AudioSource หรือ AudioClip เป็น null หรือไม่
+            Debug.LogError("AudioSource or AudioClip is null!");
         }
     }
-    
-    /*public void CollectItem()
-    {
-        collectedItems++;
-        Debug.Log($"Items collected: {collectedItems}/{totalItems}");
 
-        // อัปเดต UI ทุกครั้งที่เก็บไอเท็ม
-        UpdateItemsCollectedText();
-
-        if (collectedItems >= totalItems)
-        {
-            Debug.Log("All items collected! Revealing final mascot position.");
-            // แสดงตำแหน่งของ mascot ผ่าน UI
-            UIManager.Instance.ShowFinalMascotLocation();
-        }
-    }
-    
-    private void UpdateItemsCollectedText()
-    {
-        if (itemsCollectedText != null)
-        {
-            itemsCollectedText.text = $"Items Collected : {collectedItems}/{totalItems}";
-        }
-    }*/
 }
