@@ -629,9 +629,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -193
       objectReference: {fileID: 0}
+    - target: {fileID: 6880084196576832080, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6916090525901273313, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952528390559317529, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
+      propertyPath: m_Name
+      value: NextLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952528390559317529, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7763576951010425117, guid: a21ef87bc8f2b6e49bf9ef25a1ce46ab, type: 3}
       propertyPath: m_Pivot.x
@@ -1065,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1059023066797027170, guid: 7f6949786e825cf4a8d1beb1c0e8434c, type: 3}
       propertyPath: zoomSpeed
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1059023066797027170, guid: 7f6949786e825cf4a8d1beb1c0e8434c, type: 3}
       propertyPath: dragLimitMax.x
@@ -4336,7 +4348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493f6bd4889febd47a96680ca05ac656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Skip
 --- !u!1001 &6244194779456346991
 PrefabInstance:
   m_ObjectHideFlags: 0
