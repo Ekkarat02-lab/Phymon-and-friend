@@ -1,5 +1,6 @@
 using UnityEngine; 
 using System.Collections;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,7 +9,10 @@ public class LevelManager : MonoBehaviour
     public GameObject indicatorArrowPrefab;
     public QuestionManager questionManager;
     public int rewardAmount = 10;
-
+    public TextMeshProUGUI scoreText;
+    
+    private float[] mascotStartTimes = new float[5];
+    private int score = 0;
     private GameObject[] mascots;
     private int foundMascots = 0;
     private int targetMascotsToTriggerQuestion;
@@ -35,6 +39,7 @@ public class LevelManager : MonoBehaviour
             mascot.GetComponent<Mascot>().levelManager = this;
             mascot.GetComponent<Mascot>().mascotIndex = i;
             mascots[i] = mascot;
+            mascotStartTimes[i] = Time.time;
         }
     }
 
@@ -43,6 +48,28 @@ public class LevelManager : MonoBehaviour
         foundMascots++;
         Debug.Log("Mascot Found! Current count: " + foundMascots);
         AudioManager.Instance.PlayClickMascotSound();
+
+        float timeTaken = Time.time - mascotStartTimes[mascotIndex];
+        int points = 0;
+
+        if (timeTaken <= 5f)
+            points = 50;
+        else if (timeTaken <= 7f)
+            points = 35;
+        else if (timeTaken <= 10f)
+            points = 25;
+
+        int targetScore = score + points;
+        StartCoroutine(AnimateScore(targetScore));
+        
+        // รีเซ็ตเวลาให้ mascot ตัวอื่นที่ยังไม่ถูกคลิก
+        for (int i = 0; i < mascots.Length; i++)
+        {
+            if (mascots[i] != null && i != mascotIndex)
+            {
+                mascotStartTimes[i] = Time.time;
+            }
+        }
 
         if (mascots[mascotIndex] != null)
         {
@@ -63,11 +90,17 @@ public class LevelManager : MonoBehaviour
             {
                 AudioManager.Instance.PlayWinnerSound();
             }
+            // หลังจากให้รางวัลและปลดล็อคด่านใหม่ (ใน FoundMascot)
+            // หลังจากให้รางวัลและปลดล็อคด่านใหม่ (ใน FoundMascot)
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.UnlockNextLevel();
                 GameManager.Instance.GiveReward(rewardAmount);
+    
+                // เพิ่มบรรทัดนี้เพื่อเก็บคะแนนของด่านนี้
+                PlayerPrefs.SetInt("Score_Level_" + PlayerPref.instance.currentStory, score);
             }
+
             Debug.Log("All mascots collected!");
         }
     }
@@ -93,4 +126,16 @@ public class LevelManager : MonoBehaviour
             Destroy(arrow);
         }
     }
+    
+    private IEnumerator AnimateScore(int targetScore)
+    {
+        while (score < targetScore)
+        {
+            score++;
+            if (scoreText != null)
+                scoreText.text = "Score: " + score;
+            yield return new WaitForSeconds(0.02f); // ความเร็วในการเพิ่มคะแนน
+        }
+    }
+
 }

@@ -46,9 +46,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         startTime = Time.time;
-
-        Debug.Log($"[SceneAnalytics] Start Time: {startTime}");
-
+        
         Button phymonQButton = phymonQ.GetComponent<Button>();
         if (phymonQButton != null)
         {
@@ -92,7 +90,7 @@ public class GameManager : MonoBehaviour
         if (mascotUIImages.Length == previousMascotCount)
         {
             mascotCheckTimer += Time.deltaTime;
-            if (mascotCheckTimer >= 300f && !isPhymonQActive)
+            if (mascotCheckTimer >= 1500f && !isPhymonQActive)
             {
                 ShowPhymonQ();
             }
@@ -233,7 +231,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("เกมจบ!");
         ResetHearts();  // รีเซ็ตหัวใจ
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -257,7 +254,6 @@ public class GameManager : MonoBehaviour
         if (currentHearts > 0)
         {
             currentHearts--;
-            Debug.Log("เสียหัวใจ! หัวใจเหลือ: " + currentHearts);
             UpdateHeartUI();
 
             if (currentHearts <= 0)

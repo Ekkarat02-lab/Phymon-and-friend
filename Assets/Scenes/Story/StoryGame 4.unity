@@ -350,8 +350,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   dialogueImages: []
-  currentStory: 2
-  sceneName: Level 2
+  currentStory: 4
+  sceneName: Level 4
   typingSpeed: 0.05
   audioSource: {fileID: 0}
   transitionAnim: {fileID: 2084001825}

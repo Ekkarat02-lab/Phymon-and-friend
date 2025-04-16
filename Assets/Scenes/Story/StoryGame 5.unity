@@ -361,7 +361,7 @@ MonoBehaviour:
   dialogueImages: []
   dialogueImageAnimations:
   - {fileID: 9100000, guid: c6d6c9c0ace78584c814fe825bf5a292, type: 2}
-  currentStory: 0
+  currentStory: 5
   sceneName: Level 5
   audioSource: {fileID: 177648252}
   transitionAnim: {fileID: 662609917}
@@ -388,8 +388,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   dialogueImages: []
-  currentStory: 2
-  sceneName: Level 2
+  currentStory: 5
+  sceneName: Level 5
   typingSpeed: 0.05
   audioSource: {fileID: 0}
   transitionAnim: {fileID: 662609917}

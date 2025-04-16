@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2539761263272446154}
   - component: {fileID: 4362613119682529678}
   - component: {fileID: 7392001070959254902}
-  - component: {fileID: 7379849368194193785}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -62,6 +61,7 @@ MonoBehaviour:
   indicatorArrowPrefab: {fileID: 916265242935322159, guid: 0a10ce97170f02e4aa713f5ce742b9b9, type: 3}
   questionManager: {fileID: 4362613119682529678}
   rewardAmount: 10
+  scoreText: {fileID: 0}
 --- !u!114 &4362613119682529678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +81,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   levelManager: {fileID: 2539761263272446154}
-  questions: []
+  questions:
+  - questionText: "\u0E01\u0E32\u0E23\u0E09\u0E35\u0E14\u0E22\u0E32\u0E17\u0E33\u0E44\u0E21\u0E16\u0E36\u0E07\u0E2A\u0E33\u0E04\u0E31\u0E0D?"
+    answers:
+    - "\u0E40\u0E1E\u0E23\u0E32\u0E30\u0E04\u0E38\u0E13\u0E2B\u0E21\u0E2D\u0E0A\u0E2D\u0E1A\u0E09\u0E35\u0E14\u0E22\u0E32"
+    - "\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E17\u0E33\u0E43\u0E2B\u0E49\u0E41\u0E02\u0E47\u0E07\u0E41\u0E23\u0E07\u0E41\u0E25\u0E30\u0E2B\u0E32\u0E22\u0E1B\u0E48\u0E27\u0E22\u0E40\u0E23\u0E47\u0E27\u0E02\u0E36\u0E49\u0E19 "
+    - "\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E43\u0E2B\u0E49\u0E44\u0E14\u0E49\u0E23\u0E32\u0E07\u0E27\u0E31\u0E25\u0E2A\u0E15\u0E34\u0E01\u0E40\u0E01\u0E2D\u0E23\u0E4C "
+    correctAnswerIndex: 1
 --- !u!114 &7392001070959254902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,15 +101,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 2539761263272446154}
---- !u!114 &7379849368194193785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6635836111091214878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed25e5b25c5905a45b5b96dc777155aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -861,10 +861,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 5e320491-dfa4-4d88-8c39-31b7d58f8864
+  cloudProjectId: eece443c-61b8-4b17-acef-22bbda7e1855
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Phymon_And_Friend
+  projectName: Phymon-and-friend
   organizationId: ekkarat65
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

@@ -1102,7 +1102,7 @@ MonoBehaviour:
   dialogueImages: []
   dialogueImageAnimations:
   - {fileID: 9100000, guid: c6d6c9c0ace78584c814fe825bf5a292, type: 2}
-  currentStory: 0
+  currentStory: 6
   sceneName: Level 6
   audioSource: {fileID: 1886593997}
   transitionAnim: {fileID: 2095161448}

@@ -500,7 +500,7 @@ MonoBehaviour:
   dialogueImages: []
   dialogueImageAnimations:
   - {fileID: 9100000, guid: c6d6c9c0ace78584c814fe825bf5a292, type: 2}
-  currentStory: 0
+  currentStory: 2
   sceneName: Level 2
   audioSource: {fileID: 268577667}
   transitionAnim: {fileID: 758878606}
