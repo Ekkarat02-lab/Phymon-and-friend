@@ -48,6 +48,8 @@ public class PlayerPref : MonoBehaviour
         await UnityServices.InitializeAsync();
         AnalyticsService.Instance.StartDataCollection();
         sessionStartTime = DateTime.Now;
+
+        CheckAndSendRetentionEvents();
     }
 
     private void OnApplicationQuit()
@@ -81,4 +83,45 @@ public class PlayerPref : MonoBehaviour
         Debug.Log($"Session duration sent: {sessionDuration} seconds");
         Debug.Log($"Total playtime today sent: {totalSessionDurationToday} seconds");
     }
+    
+    private void CheckAndSendRetentionEvents()
+    {
+        string installDateKey = "InstallDate";
+        string storedInstallDate = PlayerPrefs.GetString(installDateKey, "");
+
+        DateTime today = DateTime.Today;
+
+        if (string.IsNullOrEmpty(storedInstallDate))
+        {
+            // First time user opened the game
+            PlayerPrefs.SetString(installDateKey, today.ToString("yyyy-MM-dd"));
+            PlayerPrefs.Save();
+            Debug.Log("Install date saved: " + today.ToString("yyyy-MM-dd"));
+        }
+        else
+        {
+            DateTime installDate = DateTime.Parse(storedInstallDate);
+            int daysSinceInstall = (today - installDate).Days;
+
+            if (daysSinceInstall == 1)
+            {
+                AnalyticsService.Instance.RecordEvent(new CustomEvent("retention_day1")
+                {
+                    { "date", today.ToString("yyyy-MM-dd") }
+                });
+                AnalyticsService.Instance.Flush();
+                Debug.Log("Retention Day 1 event sent.");
+            }
+            else if (daysSinceInstall == 7)
+            {
+                AnalyticsService.Instance.RecordEvent(new CustomEvent("retention_day7")
+                {
+                    { "date", today.ToString("yyyy-MM-dd") }
+                });
+                AnalyticsService.Instance.Flush();
+                Debug.Log("Retention Day 7 event sent.");
+            }
+        }
+    }
+
 }
